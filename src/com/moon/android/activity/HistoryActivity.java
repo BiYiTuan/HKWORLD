@@ -15,15 +15,19 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 
+
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class HistoryActivity extends Activity {
@@ -33,6 +37,7 @@ public class HistoryActivity extends Activity {
 	private HistoryDBHelper db;
 	private ImageView mImg;
 	private DisplayImageOptions options;
+	public LinearLayout mLine_home,mLine_hot;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -76,6 +81,25 @@ public class HistoryActivity extends Activity {
 		mlistView.setAdapter(madapter);
 		mlistView.setOnItemSelectedListener(mlistSelect);
 		mlistView.setOnItemClickListener(mlistClick);
+		mLine_home=(LinearLayout) findViewById(R.id.his_homeLine);
+		mLine_home.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		mLine_hot=(LinearLayout) findViewById(R.id.his_hotLine);
+		mLine_hot.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				startActivity(new Intent(HistoryActivity.this,HotActivity.class));
+				finish();
+			}
+		});
 	}
 	public OnItemClickListener mlistClick=new OnItemClickListener(){
 		@Override

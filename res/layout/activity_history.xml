@@ -79,6 +79,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
+                     android:layout_marginTop="40dp"
                     android:id="@+id/his_homeLine"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
@@ -104,7 +105,7 @@
                     android:id="@+id/his_hotLine"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="80dp"
                     android:background="@drawable/bg_program"
                     android:focusable="true"
                     android:orientation="vertical" >
@@ -123,28 +124,6 @@
                         android:textSize="18dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/his_hisLine"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:background="@drawable/bg_program"
-                    android:focusable="true"
-                    android:orientation="vertical" >
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/history" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/home_history"
-                        android:textSize="18dp" />
-                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

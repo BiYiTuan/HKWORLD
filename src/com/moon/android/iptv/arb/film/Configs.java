@@ -68,7 +68,7 @@ public class Configs {
 		public static String HOST=HOST1;//测试库
 		
 		public static String getHot(){
-			return "http://192.168.100.221:9016/Api/"+"VideoApi/hot?appid="+APP_ID+"&mac="+MAC;
+			return HOST+"VideoApi/hot?appid="+APP_ID+"&mac="+MAC;
 		}
 		/**获取列表缓存地址*/
 		public static String getListCache(){

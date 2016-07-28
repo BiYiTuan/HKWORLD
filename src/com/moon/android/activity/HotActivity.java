@@ -2,10 +2,8 @@ package com.moon.android.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.moon.android.iptv.arb.film.Configs;
@@ -14,7 +12,7 @@ import com.mooncloud.android.looktvb.R;
 import com.moonclound.android.iptv.util.MyDecode;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory.Options;
@@ -86,6 +84,7 @@ public class HotActivity extends Activity {
 			mTvList.get(i).setText(mVodList.get(i).getName());
 		}
 	}
+	@SuppressLint("NewApi")
 	private void initwidget() {
 		// TODO Auto-generated method stub
 		//mImg=(ImageView) findViewById(R.id.hot_img1);
@@ -94,10 +93,12 @@ public class HotActivity extends Activity {
 		mTvList=new ArrayList<TextView>();
 		mLineList=new ArrayList<LinearLayout>();
 		for(int i=0;i<mImgIdArr.length;i++){
-//			ImageView img=(ImageView) findViewById(mImgIdArr[i]);
-//			mImgList.add(img);
+			ImageView img=(ImageView) findViewById(mImgIdArr[i]);
+			img.setBackground(getResources().getDrawable(R.drawable.pic_loading));
+			mImgList.add(img);
 //			 Log.d("imgid",mImgIdArr[i]+"");
-			mImgList.add((ImageView)findViewById(mImgIdArr[i]));
+			
+//			mImgList.add((ImageView)findViewById(mImgIdArr[i]));
 		}
 		for(int i=0;i<mTvIdArr.length;i++){
 			mTvList.add((TextView)findViewById(mTvIdArr[i]));
