@@ -536,6 +536,7 @@ public class HomeActivity extends Activity implements OnClickListener {
 			  
 			Intent intent = new Intent();
 			intent.putExtra(Configs.INTENT_PARAM_2, mCurrentCid);
+			intent.putExtra("isAuto", "0");
 			intent.setClass(HomeActivity.this, VodsActivity.class);
 			intent.putExtra(Configs.INTENT_PARAM, vodProgram);
 			HomeActivity.this.startActivity(intent);

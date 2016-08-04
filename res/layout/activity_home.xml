@@ -25,6 +25,7 @@
             <ImageView
                 android:id="@+id/main_arrow_top"
                 style="@style/navigation_arrow"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:src="@drawable/arrow_top" />
 
@@ -38,6 +39,7 @@
             <ImageView
                 android:id="@+id/main_arrow_bottom"
                 style="@style/navigation_arrow"
+                android:layout_gravity="center"
                 android:layout_marginBottom="10dp"
                 android:src="@drawable/arrow_bottom" />
         </LinearLayout>
@@ -92,9 +94,8 @@
                     android:background="@drawable/right_line" />
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="585dp"
-                    android:layout_weight="1.5" >
+                    android:layout_width="120dp"
+                    android:layout_height="585dp" >
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -106,45 +107,49 @@
                             android:id="@+id/home_hotLine"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:focusable="true"
                             android:background="@drawable/bg_program"
-                            android:orientation="vertical" >
+                            android:focusable="true"
+                            android:orientation="vertical"
+                            android:visibility="gone" >
 
                             <ImageView
-                                android:layout_gravity="center"
                                 android:layout_width="80dp"
                                 android:layout_height="80dp"
+                                android:layout_gravity="center"
                                 android:src="@drawable/hotvideo" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:textSize="18dp"
-                                android:text="@string/home_hot" />
+                                android:text="@string/home_hot"
+                                android:textSize="18dp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/home_hisLine"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="80dp"
-                            android:focusable="true"
                             android:background="@drawable/bg_program"
+                            android:focusable="true"
                             android:orientation="vertical" >
 
                             <ImageView
                                 android:layout_width="80dp"
-                                android:layout_gravity="center"
                                 android:layout_height="80dp"
+                                android:layout_gravity="center"
                                 android:src="@drawable/history" />
 
                             <TextView
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_height="30dp"
                                 android:layout_gravity="center"
-                                android:textSize="18dp"
-                                android:text="@string/home_history" />
+                                android:focusable="true"
+                                android:ellipsize="marquee"
+                                android:marqueeRepeatLimit="marquee_forever"
+                                android:singleLine="true"
+                                android:text="@string/home_history"
+                                android:textSize="18dp" />
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>

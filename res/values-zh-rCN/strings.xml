@@ -60,8 +60,16 @@
 	<string name="drama_leading_actor_prompt">主演&#160;:</string>
 	<string name="drama_detail_info">剧情&#160;:</string>
 	
-	<string name="load_list">正在获取最新数据</string>
-	<string name="load_list_error">获取最新数据失败,可选择跳过直接进入</string>
+	
+		<string name="home_history">观看历史</string>
+	<string name="home_hot">热门推荐</string>
+	<string name="home_collect">我的收藏</string>
+	<string name="vod_add_coll">加入收藏</string>
+	<string name="vod_cancel_coll">取消收藏</string>
+	<string name="history_info"> (Reserve 50)</string>
+	<string name="home_home">首页</string>
+	<string name="load_list">正在更新节目列表</string>
+	<string name="load_list_error">更新节目列表失败,可选择跳过直接进入</string>
 	<string name="load_list_oldlist">跳过</string>
 	<string name="load_list_info">您是首次使用该APP,无法跳过,请重试</string>
 </resources>

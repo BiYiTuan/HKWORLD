@@ -5,6 +5,16 @@ public class UpdateData {
 	private String msg;
 	private String type;
 	private String url;
+	private String version;
+	
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
 
 	public String getCode() {
 		return this.code;

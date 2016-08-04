@@ -62,4 +62,16 @@
 	<string name="drama_regisseur_prompt">導演&#160;:</string>
 	<string name="drama_leading_actor_prompt">主演&#160;:</string>
 	<string name="drama_detail_info">劇情&#160;:</string>
+	
+	<string name="home_history">觀看曆史</string>
+	<string name="home_hot">熱門推薦</string>
+	<string name="home_collect">我的收藏</string>
+	<string name="vod_add_coll">加入收藏</string>
+	<string name="vod_cancel_coll">取消收藏</string>
+	<string name="history_info"> (Reserve 50)</string>
+	<string name="home_home">首頁</string>
+	<string name="load_list">正在更新節目列表</string>
+	<string name="load_list_error">更新節目列表失敗,可選擇跳過直接進入</string>
+	<string name="load_list_oldlist">跳過</string>
+	<string name="load_list_info">您是首次使用該APP,無法跳過,請重試</string>
 </resources>

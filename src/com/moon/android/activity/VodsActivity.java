@@ -36,6 +36,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -61,6 +62,7 @@ import com.moonclound.android.view.CustomToast;
 import com.moonclound.android.view.ProgramDetailLayout;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 
 public class VodsActivity extends Activity implements OnKeyListener {
 	public DbUtil db;
@@ -117,7 +119,7 @@ public class VodsActivity extends Activity implements OnKeyListener {
 	private TextView mAdTimePrompt;
 	private int mSecondRemain;
 	private Timer mSecondTimer;
-
+//    private Button mBt_collect,mBt_cacel_coll;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -130,7 +132,25 @@ public class VodsActivity extends Activity implements OnKeyListener {
 		initAd();
 		getVodData();
 		getVodDetailData();
+//		isColl();
 		// new Thread(mHistoryLoadR).start();
+	}
+
+	private void isColl() {
+		// TODO Auto-generated method stub
+		Boolean iscoll=db.isSaveColl(mVodProgram.getSid());
+//		Log.d("isColl",iscoll.toString());
+//		if(iscoll){
+//			//不在收藏夹
+//			mBt_cacel_coll.setVisibility(View.VISIBLE);
+//			mBt_collect.setVisibility(View.GONE);
+//			
+//		}else{
+//			//在收藏夹
+//			mBt_cacel_coll.setVisibility(View.GONE);
+//			mBt_collect.setVisibility(View.VISIBLE);
+//		}
+		
 	}
 
 	private void initAd() {
@@ -223,6 +243,8 @@ public class VodsActivity extends Activity implements OnKeyListener {
 		mTextShowTime = (TextView) findViewById(R.id.film_detail_Showtimes);
 		mTextIntroduce = (TextView) findViewById(R.id.film_detail_brief);
 		mBtnPlay = (Button) findViewById(R.id.vod_play_btn);
+//		mBt_collect=(Button) findViewById(R.id.vod_collect);
+//		mBt_cacel_coll=(Button) findViewById(R.id.vod_cacel_collect);
 		mBtnPlay.setTextColor(getResources().getColorStateList(
 				R.color.color_btn_play));
 		mContainerIntroduce = (LinearLayout) findViewById(R.id.container_film_introduce);
@@ -240,7 +262,8 @@ public class VodsActivity extends Activity implements OnKeyListener {
 			mTextVodName.setText(mVodProgram.getName());
 		mBtnRetry.setOnClickListener(mVodRetryClickListener);
 		showNetImage(mVodProgram.getLogo());
-
+//		mBt_collect.setOnClickListener(addCollClick);
+//		mBt_cacel_coll.setOnClickListener(delCollClick);
 		mProgramDetailLayout = (ProgramDetailLayout) findViewById(R.id.program_detail_layout);
 		// http://pic4.nipic.com/20090908/1771106_122015033242_2.jpg
 		mAdView = LayoutInflater.from(this).inflate(R.layout.layout_ad, null);
@@ -253,7 +276,42 @@ public class VodsActivity extends Activity implements OnKeyListener {
 		// mAdPopup.set
 		db = new DbUtil(VodsActivity.this);
 	}
+	private OnClickListener delCollClick=new OnClickListener(){
 
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			try {
+				Gson g=new Gson();
+				String json=g.toJson(mVodProgram);
+				db.DelColl(mVodProgram.getSid());
+				isColl();
+				Toast.makeText(VodsActivity.this, "已取消收藏", Toast.LENGTH_LONG).show();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}
+    	
+    };
+    private OnClickListener addCollClick=new OnClickListener(){
+
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			try {
+				Gson g=new Gson();
+				String json=g.toJson(mVodProgram);
+				db.SaveColl(mVodProgram.getSid(), mCid, json);
+				isColl();
+				Toast.makeText(VodsActivity.this, "已加入收藏", Toast.LENGTH_LONG).show();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+		}
+    	
+    };
 	private void showAd() {
 		logger.i("show()");
 		mSecondRemain = Integer.parseInt(mAd.getSec());
@@ -491,7 +549,7 @@ public class VodsActivity extends Activity implements OnKeyListener {
 			intent.putExtra("Cid", mCid);
 			Gson gson = new Gson(); 
 			String ProgramJson = gson.toJson(mVodProgram);  
-			
+		
 			intent.putExtra("mVodProgram", ProgramJson);
 			intent.putExtra("videolist", (Serializable) listVOdVideo);
 			intent.putExtra("hasHistory", isPlayHistory);
@@ -524,9 +582,10 @@ public class VodsActivity extends Activity implements OnKeyListener {
 			}
 		}
 	}
-
+    private String isAutoPlay;
 	private void getIntentData() {
 		Intent intent = getIntent();
+		isAutoPlay=intent.getStringExtra("isAuto");
 		mCid = intent.getStringExtra(Configs.INTENT_PARAM_2);
 		mVodProgram = (VodProgram) intent
 				.getSerializableExtra(Configs.INTENT_PARAM);
@@ -536,10 +595,9 @@ public class VodsActivity extends Activity implements OnKeyListener {
 		public void onSuccess(Object t) {
 			super.onSuccess(t);
 			logger.i((String) t);
-			String aesStr = (String) t;
+			String vodStr = (String) t;
 //			Log.d("vodStr:", vodStr);
-			String vodStr=new MyDecode().getjson(aesStr);
-			Log.d("vodStr:", vodStr);
+			vodStr=new MyDecode().getjson(vodStr);
 			if (StringUtil.isBlank(vodStr)) {
 		
 				if (!dbCacheList()) {
@@ -548,7 +606,8 @@ public class VodsActivity extends Activity implements OnKeyListener {
 				
 				return;
 			}
-			String arrayJson =vodStr;
+			String arrayJson = (String) t;
+			
 			// Log.d("arrayJson:",arrayJson);
 			if (null == arrayJson) {
 			
@@ -560,6 +619,7 @@ public class VodsActivity extends Activity implements OnKeyListener {
 			}
 			try {
 				logger.i("Video json = " + arrayJson);
+				arrayJson=new MyDecode().getjson(arrayJson);
 				parseVodJson(arrayJson);
 				Log.d("sid", mVodProgram.getSid() + "");
 				mHandler.sendEmptyMessage(Configs.SUCCESS);
@@ -588,8 +648,8 @@ public class VodsActivity extends Activity implements OnKeyListener {
 		if (dbCache != null) {
 			Log.d("--", dbCache);
 			try {
-				String jsonstr=new MyDecode().getjson(dbCache);
-				parseVodJson(jsonstr);
+				String json=new MyDecode().getjson(dbCache);
+				parseVodJson(json);
 				mHandler.sendEmptyMessage(Configs.SUCCESS);
 			} catch (Exception e) {
 			
@@ -634,7 +694,7 @@ public class VodsActivity extends Activity implements OnKeyListener {
 			mListVodVideo.add(vodVideo);
 		}
 	}
-
+   private boolean isFirst=true;
 	@SuppressLint("HandlerLeak")
 	private Handler mHandler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -642,7 +702,19 @@ public class VodsActivity extends Activity implements OnKeyListener {
 			case HISTORY_SUCCESS:
 				mBtnLastPlay.setVisibility(View.VISIBLE);
 				mTextPromptHistory.setText(getHistoryPrommpt(mArrayHistory));
-				logger.i("playpos = " + mArrayHistory[0]);
+				if(isAutoPlay.equals("1")){
+					if(isFirst){
+						isPlayHistory = true;
+						int playIndex = 0;
+						if (null != mListVodVideo
+								&& mArrayHistory[0] < mListVodVideo.size())
+							playIndex = mArrayHistory[0];
+						startPlay(playIndex);
+						isFirst=false;
+					}
+					
+				}
+				logger.i("playpos = " + mArrayHistory[1]);
 				if (null == mGridVod)
 					logger.i("grid view is null");
 				break;

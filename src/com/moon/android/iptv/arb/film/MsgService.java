@@ -9,6 +9,7 @@ import com.moonclound.android.iptv.util.UpdateData;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 public class MsgService extends Service{
 	
@@ -44,7 +45,9 @@ public class MsgService extends Service{
 		@Override
 		public void run() {
 			UpdateData localUpdateData = RequestDAO.checkUpate(MyApplication.getApplication());
+			Log.d("RequestDAOUPDATA", localUpdateData.toString());
 			if (null != localUpdateData) {
+				
 				Intent intent = new Intent();
 				intent.setAction(Configs.BroadCast.UPDATE_MSG);
 				MyApplication.updateData = localUpdateData;
