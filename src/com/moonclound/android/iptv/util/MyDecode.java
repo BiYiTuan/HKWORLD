@@ -7,16 +7,16 @@ import android.util.Log;
 public class MyDecode {
      public static String getjson(String aesstr){
     	 HashMap<String,String> hash=new HashMap<String, String>();
-    	 hash.put("Y","0");
-    	 hash.put("M","1");
-    	 hash.put("/","2");
-    	 hash.put("+","3");
-    	 hash.put("K","4");
-    	 hash.put("=","5");
-    	 hash.put("L","6");
-    	 hash.put("J","7");
-    	 hash.put("H","8");
-    	 hash.put("R","9");
+    	 hash.put("F","0");
+    	 hash.put("G","1");
+    	 hash.put("H","2");
+    	 hash.put("I","3");
+    	 hash.put("J","4");
+    	 hash.put("R","5");
+    	 hash.put("T","6");
+    	 hash.put("Y","7");
+    	 hash.put("U","8");
+    	 hash.put("M","9");
     	 String key=aesstr.substring(aesstr.length()-8,aesstr.length());
     	 String S_AES_STR=aesstr.substring(0,aesstr.length()-8);
     	 String DEXkye="";
@@ -30,7 +30,7 @@ public class MyDecode {
 //             Log.d("item",item+"");
          }
     	 int numKey=Integer.parseInt(DEXkye, 16);  
-    	 String EndKey=MD5Util.getStringMD5_32(numKey+"dddd");
+    	 String EndKey=MD5Util.getStringMD5_32(numKey+"qweasdzxc");
 //    	 Log.d("key",key); 
 //    	 Log.d("DEXkye",DEXkye);
     	 String EedJson=AESSecurity.decrypt(S_AES_STR, EndKey);

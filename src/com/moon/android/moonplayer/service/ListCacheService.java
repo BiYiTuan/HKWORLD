@@ -186,6 +186,7 @@ public class ListCacheService {
 		showView(true);
 		FinalHttp finalHttp = new FinalHttp();
 		Log.d(tag,"第"+TryNumEd+ "次获取总列表地址：" + Configs.URL.getListCache());
+		
 		finalHttp.post(Configs.URL.getListCache(), new AjaxCallBack<String>() {
 			
 
