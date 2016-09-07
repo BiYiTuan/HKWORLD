@@ -6,7 +6,7 @@ import com.moonclound.android.iptv.util.MACUtils;
 
 
 public class Configs {
-	//
+	// 
 	/**Need change data start**/
 	public static final boolean debug = true;
 	public static final String APPID = "2004";
@@ -61,7 +61,7 @@ public class Configs {
 		public static final String HOST2="http://vodhk.adfex.click:9012/Api/";//正式库2
 		public static final String HOST3="http://vodhk.gfhjc.work:9012/Api/";//正式库3
 		public static String HOST=HOST1;//正式库
-		
+		 
 //		public static final String HOST1="http://23.89.145.178:9011/Api/";//测试库1
 //		public static final String HOST2="http://23.89.145.178:9011/Api/";//测试库1
 //		public static final String HOST3="http://23.89.145.178:9011/Api/";//测试库1

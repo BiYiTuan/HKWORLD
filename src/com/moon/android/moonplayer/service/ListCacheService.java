@@ -104,6 +104,7 @@ public class ListCacheService {
     	mIndex.startActivity(new Intent(mIndex,HomeActivity.class));
     }
     private void showView(boolean isTry){
+    	
     	 if(isTry){
     		 mtryView.setVisibility(View.VISIBLE);
     		 merrorView.setVisibility(View.GONE);
@@ -112,7 +113,10 @@ public class ListCacheService {
     		 mtryView.setVisibility(View.GONE);
     		 merrorView.setVisibility(View.VISIBLE);
     		 mBt_retye.requestFocus();
+    		 Toast.makeText(mIndex, "pass001", Toast.LENGTH_LONG).show();
+    		 getCache();
     	 }
+    	
     }
     
     private void showLoadListView(){
@@ -157,9 +161,10 @@ public class ListCacheService {
 		if (Alljson!=null) {
 			
 			String gson =Alljson;
-		   
+		    Log.d("alllistCache",gson);
 			try {
-				String json=new MyDecode().getjson(gson);
+//				String json=new MyDecode().getjson(gson);
+				String json=gson;
 				AllListCache = new Gson().fromJson(json,
 						new TypeToken<List<AllListModel>>() {
 						}.getType());
@@ -186,7 +191,6 @@ public class ListCacheService {
 		showView(true);
 		FinalHttp finalHttp = new FinalHttp();
 		Log.d(tag,"第"+TryNumEd+ "次获取总列表地址：" + Configs.URL.getListCache());
-		
 		finalHttp.post(Configs.URL.getListCache(), new AjaxCallBack<String>() {
 			
 
@@ -197,7 +201,8 @@ public class ListCacheService {
 				super.onSuccess(t);
 				Log.d(tag, "网络获取节目单:" + t);
 				try {
-					String json=new MyDecode().getjson(t);
+//					String json=new MyDecode().getjson(t);
+					String json=t;
 					AllListCache = new Gson().fromJson(json,
 							new TypeToken<List<AllListModel>>() {
 							}.getType());

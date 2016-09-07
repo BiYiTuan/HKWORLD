@@ -52,8 +52,10 @@ public class MsgBroadcastReceiver extends BroadcastReceiver {
 	private String DownPath;
 	public MsgBroadcastReceiver(Activity activity){
 		mActivity=activity;
+		
 		mScrollTextview=(GGTextView)mActivity.findViewById(R.id.marquee_text);
 		mScrollTextview.init(mActivity.getWindowManager());
+		mScrollTextview.setText("");
 	}
 	
 	@Override

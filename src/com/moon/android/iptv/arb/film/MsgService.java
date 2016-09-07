@@ -45,7 +45,7 @@ public class MsgService extends Service{
 		@Override
 		public void run() {
 			UpdateData localUpdateData = RequestDAO.checkUpate(MyApplication.getApplication());
-			Log.d("RequestDAOUPDATA", localUpdateData.toString());
+//			Log.d("RequestDAOUPDATA", localUpdateData.toString());
 			if (null != localUpdateData) {
 				
 				Intent intent = new Intent();
